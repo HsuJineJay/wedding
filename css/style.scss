@@ -270,9 +270,6 @@ p {
   2. Layout & Helpers
   共用佈局與輔助工具
 -------------------------------------------*/
-.container {
-  max-width: 86% !important;
-}
 
 /* Padding */
 .px-9vw {
@@ -1409,59 +1406,110 @@ p {
 
 /* --- Section 2 --- */
 #section2 {
+  // .text {
+  //       position: absolute;
+  //       font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 'Inter', sans-serif;
+  //       letter-spacing: -0.01em;
+  //       top: 25px;
+  //       left: 25px;
+  //       width: 23%;
+  //       min-width: 300px;
+  //   }
+
+  //   .visual {
+  //       position: absolute;
+  //       top: 25px;
+  //       right: 25px;
+  //       width: 12vw;
+  //   }
+
+  //   .pin-height {
+  //       height: 750vh;
+  //   }
+
+  //   .container {
+  //       display: flex;
+  //       align-items: center;
+  //       height: 100vh;
+  //       width: 100%;
+  //       max-width: 100vw;
+  //   }
+
+  //   .center {
+  //       position: relative;
+  //       width: 100%;
+  //   }
+
+  //   .sentence {
+  //       width: 100%;
+  //       text-align: center;
+  //       display: flex;
+  //       justify-content: center;
+  //       font: 500 normal 10vw / 0.9 'Inter', sans-serif;
+
+  //       span {
+  //           display: inline-block;
+  //           letter-spacing: -0.06em;
+  //       }
+
+  //       // 當 sentence 不是第一個小孩時，改為絕對定位重疊
+  //       &:not(:first-child) {
+  //           position: absolute;
+  //           left: 0;
+  //           top: 0;
+  //       }
+  //   }
+
   .text {
-        position: absolute;
-        font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 'Inter', sans-serif;
-        letter-spacing: -0.01em;
-        top: 25px;
-        left: 25px;
-        width: 23%;
-        min-width: 300px;
-    }
+    position: absolute;
+    font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    top: 25px;
+    left: 25px;
+    width: 23%;
+    min-width: 300px;
+  }
 
-    .visual {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        width: 12vw;
-    }
+  .visual {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 12vw;
+  }
 
-    .pin-height {
-        height: 750vh;
-    }
+  .pin-height {
+    height: 600vh;
+  }
 
-    .container {
-        display: flex;
-        align-items: center;
-        height: 100vh;
-        width: 100%;
-        max-width: 100vw;
-    }
+  .container {
+    display: flex;
+    align-items: center;
+    height: 100vh
+  }
 
-    .center {
-        position: relative;
-        width: 100%;
-    }
+  .center {
+    position: relative;
+    width: 100%;
+  }
 
-    .sentence {
-        width: 100%;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        font: 500 normal 10vw / 0.9 'Inter', sans-serif;
+  .sentence {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font: 500 normal 10vw/0.9 'Inter', sans-serif;
+  }
 
-        span {
-            display: inline-block;
-            letter-spacing: -0.06em;
-        }
+  .sentence span {
+    display: inline-block;
+    letter-spacing: -0.06em;
+  }
 
-        // 當 sentence 不是第一個小孩時，改為絕對定位重疊
-        &:not(:first-child) {
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-    }
+  .sentence:not(:first-child) {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 
 

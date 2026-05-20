@@ -205,10 +205,6 @@ p {
   2. Layout & Helpers
   共用佈局與輔助工具
 -------------------------------------------*/
-.container {
-  max-width: 86% !important;
-}
-
 /* Padding */
 .px-9vw {
   padding-right: 9vw;
@@ -1234,7 +1230,7 @@ p {
   width: 12vw;
 }
 #section2 .pin-height {
-  height: 750vh;
+  height: 600vh;
 }
 #section2 .container {
   display: flex;
