@@ -1228,7 +1228,7 @@ p {
 
 /* --- Section 1 --- */
 #section1 {
-
+  background-color: #E6E1D5;
   overflow: hidden;
   position: relative;
 
@@ -1295,15 +1295,19 @@ p {
     width: 25vw;
     min-width: 280px;
     aspect-ratio: 0.75;
-    border-radius: 2vw;
+    // border-radius: 2vw;
     overflow: hidden;
     object-fit: cover;
     text-align: center;
     text-transform: uppercase;
-    border: 0.5vw solid currentColor;
+    border-left: 1vw solid #fff;
+    border-right: 1vw solid #fff;
+    border-top: 1.2vw solid #fff;
+    border-bottom: 5vw solid #fff;
+    box-shadow: 3px 3px 10px -2px #222;
 
     @include media-down($bp-sm) {
-      border: 6px solid currentColor;
+      border: 6px solid #fff;
       border-radius: 23px;
     }
 
