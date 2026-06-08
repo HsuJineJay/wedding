@@ -1250,7 +1250,14 @@ p {
   text-align: center;
   display: flex;
   justify-content: center;
-  font: 500 normal 10vw/0.9 "Inter", sans-serif;
+}
+#section2 .sentence:nth-child(1) {
+  font-family: "Cinzel", serif;
+  font-size: 40px;
+}
+#section2 .sentence:nth-child(1) {
+  font-family: "Noto Serif TC", serif;
+  font-size: 40px;
 }
 #section2 .sentence span {
   display: inline-block;

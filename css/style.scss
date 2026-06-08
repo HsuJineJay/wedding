@@ -29,6 +29,7 @@ $font-tinos: "Tinos", serif;
 $font-inter: "Inter", sans-serif;
 $font-roboto: "Roboto", sans-serif;
 $font-prata: "Prata", serif;
+$font-cinzel: "Cinzel", serif;
 
 
 // Breakpoints
@@ -1501,7 +1502,17 @@ p {
     text-align: center;
     display: flex;
     justify-content: center;
-    font: 500 normal 10vw/0.9 'Inter', sans-serif;
+    // font: 500 normal 10vw/0.9 'Inter', sans-serif;
+  }
+
+  .sentence:nth-child(1){
+    font-family: $font-cinzel;
+    font-size: 40px;
+  }
+
+  .sentence:nth-child(1){
+    font-family: $font-serif-tc;
+    font-size: 40px;
   }
 
   .sentence span {
