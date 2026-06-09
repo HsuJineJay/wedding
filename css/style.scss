@@ -30,6 +30,7 @@ $font-inter: "Inter", sans-serif;
 $font-roboto: "Roboto", sans-serif;
 $font-prata: "Prata", serif;
 $font-cinzel: "Cinzel", serif;
+$font-cactus: "Cactus Classical Serif", serif;
 
 
 // Breakpoints
@@ -1291,7 +1292,7 @@ p {
     }
   }
 
-  .card {
+  .card-item {
     position: relative;
     width: 25vw;
     min-width: 280px;
@@ -1305,7 +1306,7 @@ p {
     border-right: 1vw solid #fff;
     border-top: 1.2vw solid #fff;
     border-bottom: 5vw solid #fff;
-    box-shadow: 3px 3px 10px -2px #222;
+    // box-shadow: 3px 3px 10px -2px #222;
 
     @include media-down($bp-sm) {
       border: 6px solid #fff;
@@ -1483,7 +1484,7 @@ p {
   }
 
   .pin-height {
-    height: 600vh;
+    height: 400vh;
   }
 
   .container {
@@ -1510,9 +1511,9 @@ p {
     font-size: 40px;
   }
 
-  .sentence:nth-child(1){
-    font-family: $font-serif-tc;
-    font-size: 40px;
+  .sentence:nth-child(2){
+    font-family: $font-cactus;
+    font-size: 48px;
   }
 
   .sentence span {

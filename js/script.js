@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const sec1Container = document.querySelector('.section1 .container')
     const cardsContainer = sec1Container.querySelector('.cards')
-    const cards = document.querySelectorAll('.card')
+    const cards = document.querySelectorAll('.card-item')
     const distance = cardsContainer.clientWidth - window.innerWidth
     
     gsap.to('.scroll', {
