@@ -6,32 +6,45 @@
 // --- Variables ---
 
 // Colors
-$color-blue: #0B3359;
-$color-green: #84BC26;
-$color-red: #FF000D;
-$color-dark-red: #980B12;
-$color-gold: #D2D1BD;
+$color-blue: #0b3359;
+$color-green: #84bc26;
+$color-red: #ff000d;
+$color-dark-red: #980b12;
+$color-gold: #d2d1bd;
 $color-white: #fff;
 $color-black: #000;
-$color-text: #06182E;
+$color-text: #06182e;
 $color-placeholder: #000;
 $color-border: #000;
-$color-dot: #D9D9D9;
+$color-dot: #d9d9d9;
 
 // Gradients
-$gradient-gold: linear-gradient(270deg, #FBE9B9 -22.33%, #C4B08B -0.15%, #98835F 32.01%, #FBE9B9 61.95%, #98835F 88.57%);
-$gradient-yellow: linear-gradient(312deg, #FBE9B9 -540.04%, #C4B08B -310.43%, #98835F 22.52%, #FBE9B9 332.5%, #98835F 608.04%);
+$gradient-gold: linear-gradient(
+  270deg,
+  #fbe9b9 -22.33%,
+  #c4b08b -0.15%,
+  #98835f 32.01%,
+  #fbe9b9 61.95%,
+  #98835f 88.57%
+);
+$gradient-yellow: linear-gradient(
+  312deg,
+  #fbe9b9 -540.04%,
+  #c4b08b -310.43%,
+  #98835f 22.52%,
+  #fbe9b9 332.5%,
+  #98835f 608.04%
+);
 
 // Fonts
-$font-serif-tc: 'Noto Serif TC', serif;
-$font-sans-tc: 'Noto Sans TC', sans-serif;
+$font-serif-tc: "Noto Serif TC", serif;
+$font-sans-tc: "Noto Sans TC", sans-serif;
 $font-tinos: "Tinos", serif;
 $font-inter: "Inter", sans-serif;
 $font-roboto: "Roboto", sans-serif;
 $font-prata: "Prata", serif;
 $font-cinzel: "Cinzel", serif;
 $font-cactus: "Cactus Classical Serif", serif;
-
 
 // Breakpoints
 $bp-xl: 1800px;
@@ -54,7 +67,6 @@ $bp-xs: 576px;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 
 $padding-x: 96px;
 $padding-x-xl: 80px;
@@ -82,8 +94,6 @@ $padding-x-xs: 20px;
     --padding-x: #{$padding-x-xs};
   }
 }
-
-
 
 /*-------------------------------------------
   1. Global Resets & Base
@@ -267,7 +277,6 @@ p {
   word-wrap: break-word;
 }
 
-
 /*-------------------------------------------
   2. Layout & Helpers
   共用佈局與輔助工具
@@ -425,7 +434,6 @@ p {
   color: $color-gold !important;
 }
 
-
 /*-------------------------------------------
   3. Typography
   文字排版
@@ -452,7 +460,6 @@ p {
 
     @include media-down($bp-sm) {
       font-size: 15px;
-
     }
   }
 
@@ -507,9 +514,7 @@ p {
       font-size: 28px;
       letter-spacing: 0.4vmin;
     }
-
   }
-
 
   &--max {
     font-family: $font-tinos;
@@ -558,16 +563,10 @@ p {
       font-size: 24px;
       letter-spacing: 1.2px;
     }
-
   }
-
 }
 
-
-
 .text-chin {
-
-
   &--sm {
     font-size: 14px;
     font-family: $font-serif-tc;
@@ -586,7 +585,6 @@ p {
       // font-size: 18px;
       // letter-spacing: 0.2vmin;
       // line-height: 250%;
-
     }
 
     @include media-down($bp-xs) {
@@ -595,7 +593,6 @@ p {
       // line-height: 210%;
     }
   }
-
 
   &--md {
     font-family: $font-sans-tc;
@@ -609,7 +606,6 @@ p {
       font-size: 18px;
       // letter-spacing: 0.2vmin;
       // line-height: 250%;
-
     }
 
     @include media-down($bp-xs) {
@@ -618,8 +614,6 @@ p {
       line-height: 200%;
     }
   }
-
-
 
   &--md-lg {
     font-size: 28px;
@@ -678,8 +672,6 @@ p {
     @include media-down($bp-xs) {
       font-size: 44px;
     }
-
-
   }
 
   &--title {
@@ -718,7 +710,6 @@ p {
   letter-spacing: 0px;
 
   @include media-down($bp-md) {
-
     font-size: 10px;
   }
 
@@ -732,7 +723,11 @@ p {
 }
 
 .description-box {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 80%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.5) 80%
+  );
   width: 100%;
   height: 50%;
   right: 0;
@@ -747,8 +742,6 @@ p {
 }
 
 .text-form {
-
-
   &--lg {
     font-family: $font-serif-tc;
     font-size: 16px;
@@ -814,7 +807,6 @@ p {
   text-align: end;
 }
 
-
 /*-------------------------------------------
   4. Components
   元件
@@ -834,8 +826,6 @@ p {
   position: relative;
   overflow: hidden;
   width: 100.1vw;
-
-
 
   @include media-down($bp-lg) {
     padding-left: 15vw;
@@ -861,9 +851,6 @@ p {
     padding-right: 15px;
   }
 
-
-
-
   .form-box {
     gap: 48px;
     // padding: 200px 120px 160px 120px;
@@ -883,7 +870,6 @@ p {
       gap: 60px;
       z-index: 999;
     }
-
 
     .title-group {
       gap: 40px;
@@ -910,9 +896,7 @@ p {
           letter-spacing: 1px;
         }
       }
-
     }
-
 
     .input-block {
       gap: 32px;
@@ -920,7 +904,6 @@ p {
       @include media-down($bp-md) {
         gap: 0;
       }
-
 
       .form-msg {
         transition: all 0.5s ease-in-out;
@@ -933,14 +916,9 @@ p {
 
         textarea {
           height: 100%;
-
         }
       }
     }
-
-
-
-
 
     .info-sub {
       // width: 55vw;
@@ -966,8 +944,6 @@ p {
           letter-spacing: 1px;
         }
       }
-
-
 
       p {
         font-family: $font-serif-tc;
@@ -1002,26 +978,17 @@ p {
       }
     }
 
-
-
     .icon-group {
       img:hover {
         transition: all 0.5s ease-in-out;
-        opacity: .5;
+        opacity: 0.5;
       }
     }
-
-
-
 
     .copy-right {
       margin-top: 80px;
     }
   }
-
-
-
-
 
   .text-chin--lg {
     @include media-down($bp-sm) {
@@ -1045,11 +1012,9 @@ p {
     color: $color-white;
   }
 
-
-
-  input[type=text],
-  input[type=tel],
-  input[type=email],
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
   select,
   textarea {
     // padding: 20px 0px 24px 20px !important;
@@ -1078,9 +1043,6 @@ p {
     opacity: 0;
   }
 
-
-
-
   .form-select,
   .form-control {
     color: rgba($color: #141414, $alpha: 0.8) !important;
@@ -1098,12 +1060,10 @@ p {
     }
   }
 
-
   .form-select {
     // 下拉選單旁邊的小箭頭，修改顏色的話請改stroke='%23000000'中的000000是色碼(ex:ffffff)
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
   }
-
 
   /* --- Submit Button --- */
   #submit {
@@ -1156,8 +1116,6 @@ p {
     @include media-down($bp-lg) {
       width: 100%;
     }
-
-
   }
 
   .custom-checkbox {
@@ -1169,8 +1127,8 @@ p {
     input[type="checkbox"] {
       display: none;
 
-      &:checked+.circle::after {
-        content: '';
+      &:checked + .circle::after {
+        content: "";
         position: absolute;
         left: 25%;
         top: 50%;
@@ -1197,15 +1155,7 @@ p {
       vertical-align: middle;
     }
   }
-
-
-
-
 }
-
-
-
-
 
 /*-------------------------------------------
   5. Plugin Overrides
@@ -1219,10 +1169,6 @@ p {
   /* pagination 圓點顏色 */
 }
 
-
-
-
-
 /*-------------------------------------------
   6. Page Sections
   各區塊獨立設定
@@ -1230,7 +1176,7 @@ p {
 
 /* --- Section 1 --- */
 #section1 {
-  background-color: #E6E1D5;
+  background-color: #e6e1d5;
   overflow: hidden;
   position: relative;
 
@@ -1246,7 +1192,7 @@ p {
     width: 100%;
     display: flex;
     align-items: center;
-    font: 500 normal clamp(12px, 0.9vw, 100px) / normal 'IBM Plex Mono';
+    font: 500 normal clamp(12px, 0.9vw, 100px) / normal "IBM Plex Mono";
     text-transform: uppercase;
     padding: 25px;
     top: 0;
@@ -1257,7 +1203,7 @@ p {
       padding: 15px;
     }
 
-    &>* {
+    & > * {
       flex: 1;
 
       &:nth-child(2) {
@@ -1270,7 +1216,7 @@ p {
     }
   }
 
-  .container {
+  .sec-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1309,10 +1255,9 @@ p {
     // box-shadow: 3px 3px 10px -2px #222;
 
     @include media-down($bp-sm) {
-      border: 6px solid #fff;
-      border-radius: 23px;
+      // border: 6px solid #fff;
+      // border-radius: 23px;
     }
-
 
     img {
       position: absolute;
@@ -1326,31 +1271,31 @@ p {
 
     // 這裡直接將各個卡片的顏色寫入
     &:nth-child(1) {
-      color: #BCEFFF;
+      color: #bcefff;
     }
 
     &:nth-child(2) {
-      color: #C9FE6E;
+      color: #c9fe6e;
     }
 
     &:nth-child(3) {
-      color: #FAFF9E;
+      color: #faff9e;
     }
 
     &:nth-child(4) {
-      color: #FC4C3B;
+      color: #fc4c3b;
     }
 
     &:nth-child(5) {
-      color: #F1F1F1;
+      color: #f1f1f1;
     }
 
     &:nth-child(6) {
-      color: #8CEDFF;
+      color: #8cedff;
     }
 
     &:nth-child(7) {
-      color: #FAFF9E;
+      color: #faff9e;
     }
   }
 
@@ -1367,7 +1312,9 @@ p {
     }
 
     h2 {
-      font: 800 normal 4.5vw/0.8 'Inter', sans-serif;
+      font:
+        800 normal 4.5vw/0.8 "Inter",
+        sans-serif;
       text-wrap: auto;
       padding: 0.2em 0 0.12em;
 
@@ -1405,9 +1352,6 @@ p {
       }
     }
   }
-
-
-
 }
 
 /* --- Section 2 --- */
@@ -1468,7 +1412,9 @@ p {
 
   .text {
     position: absolute;
-    font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 'Inter', sans-serif;
+    font:
+      500 normal clamp(14px, 1.15vw, 100px) / 1.2 "Inter",
+      sans-serif;
     letter-spacing: -0.01em;
     top: 25px;
     left: 25px;
@@ -1487,10 +1433,10 @@ p {
     height: 400vh;
   }
 
-  .container {
+  .sec-container {
     display: flex;
     align-items: center;
-    height: 100vh
+    height: 100vh;
   }
 
   .center {
@@ -1506,12 +1452,12 @@ p {
     // font: 500 normal 10vw/0.9 'Inter', sans-serif;
   }
 
-  .sentence:nth-child(1){
+  .sentence:nth-child(1) {
     font-family: $font-cinzel;
     font-size: 40px;
   }
 
-  .sentence:nth-child(2){
+  .sentence:nth-child(2) {
     font-family: $font-cactus;
     font-size: 48px;
   }
@@ -1528,41 +1474,33 @@ p {
   }
 }
 
-
 /* --- Section 3 --- */
-#section3 {}
-
+#section3 {
+}
 
 /* --- Section 4 --- */
-#section4 {}
-
+#section4 {
+}
 
 /* --- Section 5 --- */
-#section5 {}
-
+#section5 {
+}
 
 /* --- Section 6 --- */
-#section6 {}
-
+#section6 {
+}
 
 /* --- Section 7 --- */
-#section7 {}
-
+#section7 {
+}
 
 /* --- Section 8 --- */
-#section8 {}
-
-
-
-
-
-
+#section8 {
+}
 
 /*-----------------------------------------------------
 置底小圖示navbar設定
 -----------------------------------------------------*/
-
-
 
 // 導覽列外部容器
 .nav-bar {
@@ -1575,12 +1513,15 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.00) 95%);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 95%
+  );
   transition: bottom 0.5s ease-in-out;
 
   @include media-down($bp-sm) {
     padding: 36px 20px 10px 20px;
-
   }
 
   // 左側 Logo 區塊
@@ -1606,7 +1547,6 @@ p {
       gap: 10px;
     }
 
-
     .nav-item {
       width: 60px;
       display: flex;
@@ -1621,9 +1561,7 @@ p {
         width: 40px;
       }
 
-
       a {
-
         // 使用 & 實作 hover 狀態
         &:hover {
           background-color: rgba(255, 255, 255, 0.1);
@@ -1631,7 +1569,6 @@ p {
 
         .fa {
           font-size: 30px;
-
 
           @include media-down($bp-sm) {
             font-size: 24px;
@@ -1642,7 +1579,6 @@ p {
           width: 40px;
           padding: 1rem 0; // 將 top 和 bottom 合併寫法
 
-
           @include media-down($bp-sm) {
             width: 24px;
           }
@@ -1652,20 +1588,14 @@ p {
   }
 }
 
-
-
-
 // back to top 按鈕
 .jquery-back-to-top {
-  background-color: #84BC26 !important;
+  background-color: #84bc26 !important;
 
   @include media-down($bp-sm) {
     display: none !important;
   }
 }
-
-
-
 
 /*-------------------------------------------
   7. Animation
@@ -1699,8 +1629,6 @@ p {
     transform: translateX(200px);
   }
 }
-
-
 
 @keyframes moveCloudLeft2 {
   0% {
@@ -1756,7 +1684,6 @@ p {
     transform: translateX(-310px) scale(5) rotate(-50deg);
   }
 }
-
 
 @keyframes moveCloudRight3 {
   0% {

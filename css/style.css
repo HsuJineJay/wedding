@@ -197,7 +197,7 @@ a:link, a:hover, a:active, a:visited {
 }
 
 p {
-  color: #06182E;
+  color: #06182e;
   word-wrap: break-word;
 }
 
@@ -334,27 +334,27 @@ p {
 }
 
 .color-red {
-  color: #FF000D;
+  color: #ff000d;
 }
 
 .color-blue {
-  color: #0B3359;
+  color: #0b3359;
 }
 
 .color-blue {
-  color: #0B3359;
+  color: #0b3359;
 }
 
 .color-green {
-  color: #84BC26;
+  color: #84bc26;
 }
 
 .color-text {
-  color: #06182E;
+  color: #06182e;
 }
 
 .color-gold {
-  color: #D2D1BD !important;
+  color: #d2d1bd !important;
 }
 
 /*-------------------------------------------
@@ -693,11 +693,11 @@ p {
 }
 
 .text-gold {
-  background: linear-gradient(270deg, #FBE9B9 -22.33%, #C4B08B -0.15%, #98835F 32.01%, #FBE9B9 61.95%, #98835F 88.57%);
+  background: linear-gradient(270deg, #fbe9b9 -22.33%, #c4b08b -0.15%, #98835f 32.01%, #fbe9b9 61.95%, #98835f 88.57%);
 }
 
 .text-yellow {
-  background: linear-gradient(312deg, #FBE9B9 -540.04%, #C4B08B -310.43%, #98835F 22.52%, #FBE9B9 332.5%, #98835F 608.04%);
+  background: linear-gradient(312deg, #fbe9b9 -540.04%, #c4b08b -310.43%, #98835f 22.52%, #fbe9b9 332.5%, #98835f 608.04%);
 }
 
 .text-center {
@@ -944,8 +944,8 @@ p {
 }
 #section-form .form-select:focus,
 #section-form .form-control:focus {
-  color: #06182E;
-  border: 1px solid #06182E !important;
+  color: #06182e;
+  border: 1px solid #06182e !important;
   box-shadow: unset !important;
 }
 #section-form .form-select {
@@ -972,8 +972,8 @@ p {
   }
 }
 #section-form #submit:hover {
-  background-color: #84BC26 !important;
-  border: 1px solid #84BC26;
+  background-color: #84bc26 !important;
+  border: 1px solid #84bc26;
   color: #fff;
   transition: 0.3s ease-in-out;
 }
@@ -986,7 +986,7 @@ p {
   padding: 5px 40px;
   background-color: #fff;
   border-radius: 1000px;
-  color: #0B3359;
+  color: #0b3359;
   font-size: 24px;
   font-weight: 700;
   font-family: "Noto Serif TC", serif;
@@ -1062,7 +1062,7 @@ p {
 -------------------------------------------*/
 /* --- Section 1 --- */
 #section1 {
-  background-color: #E6E1D5;
+  background-color: #e6e1d5;
   overflow: hidden;
   position: relative;
 }
@@ -1098,7 +1098,7 @@ p {
 #section1 .header > *:nth-child(3) {
   text-align: right;
 }
-#section1 .container {
+#section1 .sec-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1135,12 +1135,6 @@ p {
   border-top: 1.2vw solid #fff;
   border-bottom: 5vw solid #fff;
 }
-@media (max-width: 991px) {
-  #section1 .card-item {
-    border: 6px solid #fff;
-    border-radius: 23px;
-  }
-}
 #section1 .card-item img {
   position: absolute;
   top: 0;
@@ -1152,25 +1146,25 @@ p {
   z-index: -1;
 }
 #section1 .card-item:nth-child(1) {
-  color: #BCEFFF;
+  color: #bcefff;
 }
 #section1 .card-item:nth-child(2) {
-  color: #C9FE6E;
+  color: #c9fe6e;
 }
 #section1 .card-item:nth-child(3) {
-  color: #FAFF9E;
+  color: #faff9e;
 }
 #section1 .card-item:nth-child(4) {
-  color: #FC4C3B;
+  color: #fc4c3b;
 }
 #section1 .card-item:nth-child(5) {
-  color: #F1F1F1;
+  color: #f1f1f1;
 }
 #section1 .card-item:nth-child(6) {
-  color: #8CEDFF;
+  color: #8cedff;
 }
 #section1 .card-item:nth-child(7) {
-  color: #FAFF9E;
+  color: #faff9e;
 }
 #section1 .card-content {
   display: flex;
@@ -1235,7 +1229,7 @@ p {
 #section2 .pin-height {
   height: 400vh;
 }
-#section2 .container {
+#section2 .sec-container {
   display: flex;
   align-items: center;
   height: 100vh;
@@ -1346,7 +1340,7 @@ p {
 }
 
 .jquery-back-to-top {
-  background-color: #84BC26 !important;
+  background-color: #84bc26 !important;
 }
 @media (max-width: 991px) {
   .jquery-back-to-top {
