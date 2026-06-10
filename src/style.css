@@ -163,10 +163,6 @@ section {
   display: block;
 }
 
-section {
-  margin-top: -1px;
-}
-
 ol,
 ul {
   list-style: none;
@@ -1104,6 +1100,7 @@ p {
   justify-content: center;
   height: 100vh;
   width: 100%;
+  max-width: 100%;
   font-size: clamp(12px, 1vw, 20px);
 }
 #section1 .cards {
