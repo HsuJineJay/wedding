@@ -235,8 +235,6 @@ section {
   display: block;
 }
 
-
-
 ol,
 ul {
   list-style: none;
@@ -1215,13 +1213,21 @@ p {
   }
 
   .sec-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    width: 100%;
-    max-width: 100%;
-    font-size: clamp(12px, 1vw, 20px);
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // height: 100vh;
+    // width: 100%;
+    // max-width: 100%;
+    // font-size: clamp(12px, 1vw, 20px);
+
+    .sec1-bkvideo {
+      width: 80vw;
+      height: 80vh;
+      top: 10vh;
+      left: 10vw;
+      border-radius: 20px;
+    }
   }
 
   .cards {

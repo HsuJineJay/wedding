@@ -31,149 +31,182 @@ import Lenis from "lenis";
 // ===============================
 // GSAP套件 平滑滾動 設定
 // ===============================
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 window.addEventListener("DOMContentLoaded", () => {
+  const sec1Container = document.querySelector(".section1 .sec-container");
+  const cardsContainer = sec1Container.querySelector(".cards");
+  const cards = document.querySelectorAll(".card-item");
+  const distance = cardsContainer.clientWidth - window.innerWidth;
 
-    const sec1Container = document.querySelector('.section1 .sec-container')
-    const cardsContainer = sec1Container.querySelector('.cards')
-    const cards = document.querySelectorAll('.card-item')
-    const distance = cardsContainer.clientWidth - window.innerWidth
-    
-    gsap.to('.scroll', {
-        autoAlpha:0,
-        duration:0.2,
+  gsap.fromTo(
+    "#sec1Video",
+    {
+      width: "80vw",
+      height: "80vh",
+      top: "10vh", // 置中：(100vh - 80vh) / 2
+      left: "10vw", // 置中：(100vw - 80vw) / 2
+      borderRadius: "20px",
+    },
+    {
+      width: "100vw",
+      height: "100vh",
+      top: "0",
+      left: "0",
+      borderRadius: "0px",
+      ease: "none",
+      scrollTrigger: {
+        trigger: sec1Container,
+        start: "top top",
+        end: "+=" + distance * 0.3, // 在橫向滾動前 30% 就完成放大
+        scrub: true,
+      },
+    },
+  );
+
+  gsap.to(".scroll", {
+    autoAlpha: 0,
+    duration: 0.2,
+    scrollTrigger: {
+      trigger: cardsContainer,
+      start: "top top",
+      end: "top top-=1",
+      toggleActions: "play none reverse none",
+    },
+  });
+
+  const scrollTween = gsap.to(cardsContainer, {
+    x: -distance,
+    ease: "none", // linear progression
+    // let's pin our container while our cardsContainer is animating
+    scrollTrigger: {
+      trigger: sec1Container,
+      pin: true,
+      scrub: true, // progress with the scroll
+      start: "top top",
+      end: "+=" + distance,
+    },
+  });
+
+  cards.forEach((card) => {
+    const values = {
+      // get a value between 30 and 50 or -30 and -50
+      x: (Math.random() * 20 + 30) * (Math.random() < 0.5 ? 1 : -1),
+      // get a value between 10 and 16 or -16 and -10
+      y: (Math.random() * 6 + 10) * (Math.random() < 0.5 ? 1 : -1),
+      // get a value between 10 and 20 or -10 and -20
+      rotation: (Math.random() * 10 + 10) * (Math.random() < 0.5 ? 1 : -1),
+    };
+
+    gsap.fromTo(
+      card,
+      {
+        // let's start from this 3 values
+        rotation: values.rotation,
+        xPercent: values.x,
+        yPercent: values.y,
+      },
+      {
+        // and finish to its 3 opposite values
+        rotation: -values.rotation,
+        xPercent: -values.x,
+        yPercent: -values.y,
+        ease: "none", // linear progression
         scrollTrigger: {
-            trigger: cardsContainer,
-            start:'top top',
-            end:'top top-=1',
-            toggleActions: "play none reverse none"
-        }
-    })
+          trigger: card,
+          containerAnimation: scrollTween, // our tween will listen to our scrollTween container position
+          start: "left 120%",
+          end: "right -20%",
+          scrub: true, // the animation progress with the scroll
+        },
+      },
+    );
+  });
 
-    const scrollTween = gsap.to(cardsContainer, {
-        x: - distance,
-        ease: 'none', // linear progression
-        // let's pin our container while our cardsContainer is animating
-        scrollTrigger: {
-            trigger: sec1Container,
-            pin: true,
-            scrub: true, // progress with the scroll
-            start: 'top top',
-            end: '+=' + distance
-        }
-    });
+  // const root = document.querySelector('.section2')
+  const sentences = document.querySelectorAll(" .sentence");
 
-    cards.forEach(card => {
-        const values = {
-            // get a value between 30 and 50 or -30 and -50
-            x: (Math.random() * 20 + 30) * (Math.random() < 0.5 ? 1 : -1),
-            // get a value between 10 and 16 or -16 and -10
-            y: (Math.random() * 6 + 10) * (Math.random() < 0.5 ? 1 : -1),
-            // get a value between 10 and 20 or -10 and -20
-            rotation: (Math.random() * 10 + 10) * (Math.random() < 0.5 ? 1 : -1)
-        };
+  const pinHeight = document.querySelector(".section2 .pin-height");
+  const sec2Container = document.querySelector(".section2 .sec-container");
 
-        gsap.fromTo(card, {
-            // let's start from this 3 values
-            rotation: values.rotation,
-            xPercent: values.x,
-            yPercent: values.y
-        }, {
-            // and finish to its 3 opposite values
-            rotation: - values.rotation,
-            xPercent: - values.x,
-            yPercent: - values.y,
-            ease: 'none', // linear progression
-            scrollTrigger:{
-                trigger:card,
-                containerAnimation: scrollTween, // our tween will listen to our scrollTween container position
-                start:'left 120%' ,
-                end:'right -20%',
-                scrub:true, // the animation progress with the scroll
-            }
-        })
-    })
+  sentences.forEach((sentence) => {
+    wrapLettersInSpan(sentence);
+  });
 
+  ScrollTrigger.create({
+    trigger: pinHeight, // Monitor the position of pin-height
+    start: "top top",
+    end: "bottom bottom",
+    pin: sec2Container, // The pinned section
+  });
 
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: pinHeight,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true, // Progress linked to scrolling
+    },
+  });
 
-    // const root = document.querySelector('.section2')
-    const sentences = document.querySelectorAll(' .sentence')
+  sentences.forEach((sentence, index) => {
+    if (sentences[index + 1]) {
+      // Move the sentence above the viewport using y & yPercent
+      tl.to(sentences[index], {
+        yPercent: -50,
+        y: "-50vh",
+        ease: "power4.in",
+      });
 
-    const pinHeight = document.querySelector('.section2 .pin-height')
-    const sec2Container = document.querySelector('.section2 .sec-container')
-    
-    sentences.forEach(sentence => {
-        wrapLettersInSpan(sentence)
-    })
+      // Move the letters above the sentence using y & yPercent
+      tl.to(
+        sentences[index].querySelectorAll("span"),
+        {
+          yPercent: -50,
+          y: "-50vh",
+          stagger: -0.02, // Stagger in the appearance
+          ease: "power2.in",
+        },
+        "<",
+      ); // Means the animation starts at the start of the previous tween
 
-    ScrollTrigger.create({
-        trigger: pinHeight, // Monitor the position of pin-height
-        start: 'top top',
-        end: 'bottom bottom',
-        pin: sec2Container // The pinned section
-    })
+      // Move the next sentence (index+1)
+      // to the middle of the viewport using y & yPercent
+      tl.from(
+        sentences[index + 1],
+        {
+          yPercent: 50, // Starts at 50 and ends at 0
+          y: "50vh", // Starts at 50vh and ends at 0
+          ease: "power4.out",
+        },
+        "<",
+      );
 
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: pinHeight,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: true // Progress linked to scrolling
-        }
-    })
-
-    sentences.forEach((sentence, index) => {
-
-        if(sentences[index+1]) {
-            // Move the sentence above the viewport using y & yPercent
-            tl.to(sentences[index], {
-                yPercent: -50,
-                y: '-50vh',
-                ease: 'power4.in',
-            })
-
-            // Move the letters above the sentence using y & yPercent
-            tl.to(sentences[index].querySelectorAll('span'), {
-                yPercent: -50,
-                y: '-50vh',
-                stagger: -0.02, // Stagger in the appearance
-                ease: 'power2.in',
-            }, '<') // Means the animation starts at the start of the previous tween
-
-            // Move the next sentence (index+1) 
-            // to the middle of the viewport using y & yPercent
-            tl.from(sentences[index+1], {
-                yPercent: 50, // Starts at 50 and ends at 0
-                y: '50vh', // Starts at 50vh and ends at 0
-                ease: 'power4.out',
-            }, '<')
-
-            // Move the next letters (index+1)
-            // to the middle of the viewport using y & yPercent
-            tl.from(sentences[index+1].querySelectorAll('span'), {
-                yPercent: 50, // Starts at 50 and ends at 0
-                y: '50vh', // Starts at 50vh and ends at 0
-                ease: 'power2.out',
-                stagger: -0.02, // Stagger in the appearance
-            }, '<')
-        }
-    })
-    
-
-})
-
+      // Move the next letters (index+1)
+      // to the middle of the viewport using y & yPercent
+      tl.from(
+        sentences[index + 1].querySelectorAll("span"),
+        {
+          yPercent: 50, // Starts at 50 and ends at 0
+          y: "50vh", // Starts at 50vh and ends at 0
+          ease: "power2.out",
+          stagger: -0.02, // Stagger in the appearance
+        },
+        "<",
+      );
+    }
+  });
+});
 
 function wrapLettersInSpan(element) {
-    const text = element.textContent;
-    element.innerHTML = text
-        .split('')
-        .map(char => char === ' ' ? '<span>&nbsp;</span>' : `<span>${char}</span>`)
-        .join(' ');
+  const text = element.textContent;
+  element.innerHTML = text
+    .split("")
+    .map((char) =>
+      char === " " ? "<span>&nbsp;</span>" : `<span>${char}</span>`,
+    )
+    .join(" ");
 }
-
-
-
 
 // ===============================
 // Lenis套件 平滑滾動 設定
@@ -188,20 +221,18 @@ const lenis = new Lenis({
 });
 
 // Lenis 滾動時同步更新 ScrollTrigger
-lenis.on('scroll', ScrollTrigger.update)
+lenis.on("scroll", ScrollTrigger.update);
 
 // 用 GSAP ticker 統一驅動
 gsap.ticker.add((time) => {
-  lenis.raf(time * 1000)
-})
-gsap.ticker.lagSmoothing(0)
+  lenis.raf(time * 1000);
+});
+gsap.ticker.lagSmoothing(0);
 
 window.addEventListener("load", () => {
   lenis.resize();
   AOS.refresh();
 });
-
-
 
 $(document).ready(function () {
   // ===============================
