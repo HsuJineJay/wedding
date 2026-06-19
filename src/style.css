@@ -740,6 +740,13 @@
   各區塊獨立設定
 -------------------------------------------*/
 /* --- Section 1 --- */
+#section1 {
+  --c1: #a39c8b;
+  --c2: #e6e1d5;
+  --p2: 60%;
+  background: radial-gradient(140% 10% at 50% -1%, var(--c1) 0%, var(--c2) var(--p2));
+}
+
 /* --- Section 2 --- */
 #section2 .sentence span {
   display: inline-block;

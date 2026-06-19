@@ -156,6 +156,45 @@ window.addEventListener("DOMContentLoaded", () => {
   //   },
   // });
 
+  gsap.fromTo(
+    "#section1",
+    {
+      "--c1": "#D9CAA6",
+      "--c2": "#E6E1D5",
+      "--p2": "60%",
+    },
+    {
+      "--c1": "#E6E1D5",
+      "--c2": "#FFF1CF",
+      "--p2": "100%",
+      scrollTrigger: {
+        trigger: sec1Container,
+        start: "top top",
+        end: () => "+=" + distance * 0.3,
+        scrub: true,
+        invalidateOnRefresh: true,
+        // markers: true,
+      },
+    },
+
+    // {
+    //   "--gy": "-1%",
+    //   "--sy": "10%",
+    // },
+    // {
+    //   "--gy": "5%",
+    //   "--sy": "11%",
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: sec1Container,
+    //     start: "top top",
+    //     end: () => "+=" + distance * 0.3,
+    //     scrub: true,
+    //     invalidateOnRefresh: true,
+    //   },
+    // },
+  );
+
   const scrollTween = gsap.to(cardsContainer, {
     x: -distance,
     ease: "none", // linear progression
