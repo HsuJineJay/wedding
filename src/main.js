@@ -39,41 +39,122 @@ window.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".card-item");
   const distance = cardsContainer.clientWidth - window.innerWidth;
 
-  gsap.fromTo(
-    "#sec1Video",
+  // gsap.fromTo(
+  //   "#sec1Video",
+  //   {
+  //     width: "80vw",
+  //     height: "70vh",
+  //     top: "15vh", // 置中：(100vh - 80vh) / 2
+  //     left: "10vw", // 置中：(100vw - 80vw) / 2
+  //     borderRadius: "20px",
+  //   },
+  //   {
+  //     width: "100vw",
+  //     height: "100vh",
+  //     top: "0",
+  //     left: "0",
+  //     borderRadius: "0px",
+  //     ease: "none",
+  //     scrollTrigger: {
+  //       trigger: sec1Container,
+  //       start: "top top",
+  //       end: "+=" + distance * 0.3, // 在橫向滾動前 30% 就完成放大
+  //       scrub: true,
+  //     },
+  //   },
+  // );
+
+  gsap.matchMedia().add(
     {
-      width: "80vw",
-      height: "80vh",
-      top: "10vh", // 置中：(100vh - 80vh) / 2
-      left: "10vw", // 置中：(100vw - 80vw) / 2
-      borderRadius: "20px",
+      // 手機版：螢幕寬度小於 768px (對應 Tailwind 的 md 以下)
+      isMobile: "(max-width: 767px)",
+      // 電腦版：螢幕寬度大於等於 768px (對應 Tailwind 的 md 以上)
+      isDesktop: "(min-width: 768px)",
     },
-    {
-      width: "100vw",
-      height: "100vh",
-      top: "0",
-      left: "0",
-      borderRadius: "0px",
-      ease: "none",
-      scrollTrigger: {
-        trigger: sec1Container,
-        start: "top top",
-        end: "+=" + distance * 0.3, // 在橫向滾動前 30% 就完成放大
-        scrub: true,
-      },
+    (context) => {
+      // 取得當前是哪個版本
+      let { isMobile, isDesktop } = context.conditions;
+
+      // 3. 根據版本動態設定初始的 height 與 top
+      // 手機版: 70vh (top 15vh 置中) | 電腦版: 80vh (top 10vh 置中)
+      let startHeight = isMobile ? "70vh" : "80vh";
+      let startTop = isMobile ? "15vh" : "10vh";
+
+      gsap.fromTo(
+        "#sec1Video",
+        {
+          width: "80vw",
+          height: startHeight, // 這裡會根據裝置自動帶入 70vh 或 80vh
+          top: startTop, // 這裡會自動帶入 15vh 或 10vh
+          left: "10vw",
+          borderRadius: "24px",
+        },
+        {
+          width: "100vw",
+          height: "100vh",
+          top: "0",
+          left: "0",
+          borderRadius: "0px",
+          ease: "none",
+          scrollTrigger: {
+            trigger: sec1Container,
+            start: "top top",
+            end: () => "+=" + distance * 0.3,
+            scrub: true,
+            invalidateOnRefresh: true, // 確保縮放時重新計算數值
+          },
+        },
+      );
     },
   );
 
-  gsap.to(".scroll", {
-    autoAlpha: 0,
-    duration: 0.2,
-    scrollTrigger: {
-      trigger: cardsContainer,
-      start: "top top",
-      end: "top top-=1",
-      toggleActions: "play none reverse none",
-    },
-  });
+  // gsap.matchMedia().add(
+  //   {
+  //     isMobile: "(max-width: 767px)",
+  //     isDesktop: "(min-width: 768px)",
+  //   },
+  //   (context) => {
+  //     let { isMobile } = context.conditions;
+
+  //     // 3. 根據版本動態設定初始的裁切範圍
+  //     // 手機版：上下各裁掉 15vh (置中露出 70vh) | 電腦版：上下各裁掉 10vh (置中露出 80vh)
+  //     let insetY = isMobile ? "15vh" : "10vh";
+  //     let insetX = "10vw"; // 左右兩版都一樣，裁掉各 10vw，露出 80vw
+
+  //     let tween = gsap.fromTo(
+  //       "#sec1Video",
+  //       {
+  //         clipPath: `inset(${insetY} ${insetX} ${insetY} ${insetX} round 20px)`,
+  //       },
+  //       {
+  //         clipPath: "inset(0vh 0vw 0vh 0vw round 0px)",
+  //         ease: "none",
+  //         scrollTrigger: {
+  //           trigger: sec1Container,
+  //           start: "top top",
+  //           // 用 function 包起來，resize 時 invalidateOnRefresh 才會真正重新算 distance
+  //           end: () => "+=" + distance * 0.3,
+  //           scrub: true,
+  //           invalidateOnRefresh: true,
+  //         },
+  //       },
+  //     );
+
+  //     // 4. 斷點切換時，手動清掉舊的 ScrollTrigger（雙重保險，matchMedia 預設也會處理）
+  //     return () => tween.scrollTrigger && tween.scrollTrigger.kill();
+  //   },
+  // );
+
+  // gsap.to(".scroll", {
+  //   autoAlpha: 0,
+  //   duration: 0.2,
+  //   scrollTrigger: {
+  //     trigger: cardsContainer,
+  //     start: "top top",
+  //     end: "top top-=1",
+  //     toggleActions: "play none reverse none",
+  //   },
+  // });
 
   const scrollTween = gsap.to(cardsContainer, {
     x: -distance,
