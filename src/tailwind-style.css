@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  --font-cactus: "Cactus Classical Serif", serif;
   --font-noto-serif: "Noto Serif TC", serif;
   --font-noto-sans: "Noto Sans TC", sans-serif;
+  --font-cinzel: "Cinzel", serif;
   --font-jomolhari: "Jomolhari", serif;
 }
 
@@ -42,8 +44,6 @@
     overflow-x: hidden;
     margin: 0;
   }
-
-
 
   img,
   object,
@@ -148,9 +148,13 @@ select {
 /* 
 共用文字樣式
 */
-@utility text-title {
-  font-family: var(--font-noto-serif);
-  font-weight: 600;
+@utility text-chin {
+  font-family: var(--font-cactus);
+  line-height: normal;
+}
+
+@utility text-eng {
+  font-family: var(--font-cinzel);
   line-height: normal;
 }
 
