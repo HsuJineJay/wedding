@@ -64,6 +64,10 @@ window.addEventListener("DOMContentLoaded", () => {
   //   },
   // );
 
+  // --------------------------------------------------
+  // GSAP sec1 背景影片縮放
+  // --------------------------------------------------
+
   gsap.matchMedia().add(
     {
       // 手機版：螢幕寬度小於 768px (對應 Tailwind 的 md 以下)
@@ -156,6 +160,10 @@ window.addEventListener("DOMContentLoaded", () => {
   //   },
   // });
 
+  // --------------------------------------------------
+  // GSAP sec1 背景漸層色漸變
+  // --------------------------------------------------
+
   gsap.fromTo(
     "#section1",
     {
@@ -194,6 +202,10 @@ window.addEventListener("DOMContentLoaded", () => {
     //   },
     // },
   );
+
+  // --------------------------------------------------
+  // GSAP sec1 卡片動畫
+  // --------------------------------------------------
 
   const scrollTween = gsap.to(cardsContainer, {
     x: -distance,
@@ -243,11 +255,16 @@ window.addEventListener("DOMContentLoaded", () => {
     );
   });
 
+  // --------------------------------------------------
+  // GSAP sec3 文字逐字進出動畫
+  // --------------------------------------------------
+
   // const root = document.querySelector('.section3')
   const sentences = document.querySelectorAll(" .sentence");
 
   const pinHeight = document.querySelector(".section3 .pin-height");
   const sec2Container = document.querySelector(".section3 .sec-container");
+  const sec3Bkimg = document.querySelector("#sec3-bkimg");
 
   sentences.forEach((sentence) => {
     wrapLettersInSpan(sentence);
@@ -316,6 +333,46 @@ window.addEventListener("DOMContentLoaded", () => {
       );
     }
   });
+
+  // --------------------------------------------------
+  // GSAP sec3 卡片圖片視差滾動
+  // --------------------------------------------------
+  const sec3Imgs = document.querySelectorAll(".sec3-img");
+
+  sec3Imgs.forEach((img) => {
+    gsap.fromTo(
+      img,
+      { yPercent: -15 },
+      {
+        yPercent: 5,
+        ease: "none",
+        scrollTrigger: {
+          trigger: img.parentElement, // 用外層容器當 trigger，避免被裁切影響判定範圍
+          start: "top bottom", // 容器頂部碰到 viewport 底部時開始
+          end: "bottom top", // 容器底部離開 viewport 頂部時結束
+          scrub: true,
+        },
+      },
+    );
+  });
+
+  // --------------------------------------------------
+  // GSAP sec3 背景圖視差滾動
+  // --------------------------------------------------
+  gsap.fromTo(
+    sec3Bkimg,
+    { yPercent: -10 },
+    {
+      yPercent: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: pinHeight,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+      },
+    },
+  );
 });
 
 function wrapLettersInSpan(element) {
@@ -332,7 +389,7 @@ function wrapLettersInSpan(element) {
 // Lenis套件 平滑滾動 設定
 // ===============================
 const lenis = new Lenis({
-  duration: 1.2,
+  duration: 1.5,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: "vertical",
   gestureOrientation: "vertical",
@@ -353,6 +410,31 @@ window.addEventListener("load", () => {
   lenis.resize();
   AOS.refresh();
 });
+
+// --------------------------------------------------
+// 婚禮倒數天數計算
+// --------------------------------------------------
+
+function updateWeddingCountdown() {
+  const countdownEl = document.getElementById("countdownDays");
+  if (!countdownEl) return;
+
+  // 婚禮日期（年, 月-1, 日）月份是 0-based，10月要寫成 9
+  const weddingDate = new Date(2026, 9, 25);
+
+  // 取得今天，並把時間部分清零，避免因為「現在幾點」導致算出誤差
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  weddingDate.setHours(0, 0, 0, 0);
+
+  // 計算相差的毫秒數，再換算成天數
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const diffDays = Math.round((weddingDate - today) / msPerDay);
+
+  countdownEl.textContent = diffDays > 0 ? diffDays : 0;
+}
+
+updateWeddingCountdown();
 
 $(document).ready(function () {
   // ===============================
@@ -477,11 +559,11 @@ $(document).ready(function () {
   // ===============================
   // jarallax套件 視差滾動 設定
   // ===============================
-  // jarallax(document.querySelectorAll("#section3"), {
+  // jarallax(document.querySelectorAll("#sec3-bkimg"), {
   //   speed: 0.5,
   // });
 
-  // jarallax(document.querySelectorAll("#section4"), {
+  // jarallax(document.querySelectorAll(".sec3-img"), {
   //   speed: 0.8,
   // });
 

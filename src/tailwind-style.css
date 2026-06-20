@@ -159,6 +159,11 @@ select {
   line-height: normal;
 }
 
+@utility text-noto-sans {
+  font-family: var(--font-noto-sans);
+  line-height: normal;
+}
+
 @utility text-eng {
   font-family: var(--font-cinzel);
   line-height: normal;
