@@ -748,17 +748,17 @@
 }
 
 /* --- Section 2 --- */
-#section2 .sentence span {
+/* --- Section 3 --- */
+#section3 .sentence span {
   display: inline-block;
   letter-spacing: -0.06em;
 }
-#section2 .sentence:not(:first-child) {
+#section3 .sentence:not(:first-child) {
   position: absolute;
   left: 0;
   top: 0;
 }
 
-/* --- Section 3 --- */
 /* --- Section 4 --- */
 /* --- Section 5 --- */
 /* --- Section 6 --- */

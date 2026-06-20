@@ -6,6 +6,7 @@
   --font-noto-sans: "Noto Sans TC", sans-serif;
   --font-cinzel: "Cinzel", serif;
   --font-jomolhari: "Jomolhari", serif;
+  --font-stix-two-text: "STIX Two Text", serif;
 }
 
 /* 
@@ -148,13 +149,23 @@ select {
 /* 
 共用文字樣式
 */
-@utility text-chin {
+@utility text-cactus {
   font-family: var(--font-cactus);
+  line-height: normal;
+}
+
+@utility text-noto-serif {
+  font-family: var(--font-noto-serif);
   line-height: normal;
 }
 
 @utility text-eng {
   font-family: var(--font-cinzel);
+  line-height: normal;
+}
+
+@utility text-stix {
+  font-family: var(--font-stix-two-text);
   line-height: normal;
 }
 

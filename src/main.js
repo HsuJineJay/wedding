@@ -243,11 +243,11 @@ window.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  // const root = document.querySelector('.section2')
+  // const root = document.querySelector('.section3')
   const sentences = document.querySelectorAll(" .sentence");
 
-  const pinHeight = document.querySelector(".section2 .pin-height");
-  const sec2Container = document.querySelector(".section2 .sec-container");
+  const pinHeight = document.querySelector(".section3 .pin-height");
+  const sec2Container = document.querySelector(".section3 .sec-container");
 
   sentences.forEach((sentence) => {
     wrapLettersInSpan(sentence);
