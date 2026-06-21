@@ -1,5 +1,5 @@
 {
-  "name": "wedding-vite",
+  "name": "wedding",
   "version": "1.0.0",
   "type": "module",
   "description": "",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
     "autoprefixer": "^10.5.0",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
     "vite": "^8.0.16"
@@ -42,17 +43,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HsuJineJay/theForestIsland-tailwind.git"
+    "url": "git+https://github.com/HsuJineJay/wedding.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/HsuJineJay/theForestIsland-tailwind/issues"
+    "url": "https://github.com/HsuJineJay/wedding/issues"
   },
-  "homepage": "https://github.com/HsuJineJay/theForestIsland-tailwind#readme"
+  "homepage": "https://github.com/HsuJineJay/wedding#readme"
 }
