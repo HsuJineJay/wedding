@@ -487,93 +487,167 @@ $(document).ready(function () {
   // ===============================
   // 表單連結
   // ===============================
-  // const checkBox = document.getElementById("invalidCheck");
-  // const submitBtn = document.getElementById("submit");
 
-  // submitBtn.addEventListener("click", function (event) {
-  //   // 檢查勾選框是否被勾選
-  //   if (!checkBox.checked) {
-  //     // 如果勾選框沒有被勾選，顯示提示訊息
-  //     alert("請勾選同意條款後再提交表單！");
-  //     // 取消提交動作
-  //     event.preventDefault();
-  //   } else {
-  //     // 防止AJAX觸發表單提交
-  //     var username = $("#username").val() || "未填寫";
-  //     var phone = $("#phone").val() || "未填寫";
-  //     var contactTime = $("#contactTime").val() || "未填寫";
-  //     var product = $("#product").val() || "未填寫";
-  //     var msg = $("#msg").val() || "未填寫";
+  // 出席與否 - 控制後續欄位是否顯示/必填
 
-  //     // 姓名驗證（只允許字母和空格）
-  //     // var usernameRegex = /^[a-zA-Z\u4e00-\u9fa5]{1,6}$/;
-  //     // if (username == "未填寫" || !usernameRegex.test(username)) {
-  //     if (username == "未填寫") {
-  //       $("#username").focus();
-  //       alert("請填寫姓名");
-  //       return false;
-  //     }
+  const attendSelect = document.getElementById("attend");
+  const attendDetails = document.getElementById("attendDetails");
 
-  //     // 電話驗證（有效的 10 位數字）
-  //     // var phoneRegex = /^0\d{9}$/;
-  //     // if (phone == "未填寫" || !phoneRegex.test(phone)) {
-  //     if (phone == "未填寫") {
-  //       $("#phone").focus();
-  //       alert("請填寫有效的電話號碼");
-  //       return false;
-  //     }
+  function updateAttendDetails() {
+    const isAttending = attendSelect.value === "YES！我會出席";
 
-  //     // 方便聯絡時段驗證
-  //     if (contactTime == "未填寫") {
-  //       $("#contactTime").focus();
-  //       alert("請選擇方便聯絡時段");
-  //       return false;
-  //     }
+    if (isAttending) {
+      attendDetails.classList.remove("grid-rows-[0fr]", "opacity-0");
+      attendDetails.classList.add("grid-rows-[1fr]", "opacity-100");
+    } else {
+      attendDetails.classList.remove("grid-rows-[1fr]", "opacity-100");
+      attendDetails.classList.add("grid-rows-[0fr]", "opacity-0");
+    }
 
-  //     // 了解產品驗證
-  //     if (product == "未填寫") {
-  //       $("#product").focus();
-  //       alert("請選擇購屋需求");
-  //       return false;
-  //     }
+    // 不出席時，把裡面的欄位都清空、停用，避免殘留資料被誤送出
+    attendDetails.querySelectorAll("select, input").forEach((el) => {
+      el.disabled = !isAttending;
+      if (!isAttending) {
+        if (el.tagName === "SELECT") el.selectedIndex = 0;
+        else el.value = "";
+      }
+    });
 
-  //     // 如果必填項目都填寫了，才觸發AJAX
-  //     var data = {
-  //       "entry.2126348613": username,
-  //       "entry.479019153": phone,
-  //       "entry.231631390": contactTime,
-  //       "entry.399790567": product,
-  //       "entry.169184883": msg,
-  //     };
+    // 等高度動畫跑完、版面穩定後，重新告知 ScrollTrigger 和 Lenis 目前的真實高度
+    attendDetails.addEventListener(
+      "transitionend",
+      () => {
+        ScrollTrigger.refresh();
+        lenis.resize();
+      },
+      { once: true },
+    );
+  }
 
-  //     // 使用AJAX發送表單資料
-  //     $.ajax({
-  //       type: "POST",
-  //       url: "https://docs.google.com/forms/d/e/1FAIpQLSdm0MlshrL8_sohCn6_hAP4WxZa4Ct41J4FdHNbG3WP_gAdiQ/formResponse", //填寫google表單連結
-  //       data: data,
-  //       complete: function () {
-  //         alert("已經成功送出表單，我們會盡快請專員與您聯繫，感謝您的填寫！");
-  //         // location.href = "index.php";
-  //         location.href = "index.html";
-  //       },
-  //     });
-  //   }
-  // });
+  if (attendSelect && attendDetails) {
+    attendSelect.addEventListener("change", updateAttendDetails);
+    updateAttendDetails(); // 頁面載入時先執行一次，預設是收合的
+  }
+
+  // ===============================
+
+  const submitBtn = document.getElementById("submit");
+
+  submitBtn.addEventListener("click", function (event) {
+    var username = $("#username").val() || "未填寫";
+    var email = $("#email").val() || "未填寫";
+    var attend = $("#attend").val() || "未填寫";
+    var msg = $("#msg").val() || "未填寫";
+
+    if (username == "未填寫") {
+      $("#username").focus();
+      alert("請填寫姓名");
+      return false;
+    }
+
+    var emailRegex =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    if (email == "未填寫" || !emailRegex.test(email)) {
+      $("#email").focus();
+      alert("請填寫有效的信箱");
+      return false;
+    }
+
+    if (attend == "未填寫") {
+      $("#attend").focus();
+      alert("請選擇是否可以參加我們的婚禮");
+      return false;
+    }
+
+    const isAttending = attend === "YES！我會出席";
+
+    var ceremony = "不適用";
+    var people = "不適用";
+    var vegan = "不適用";
+    var child = "不適用";
+    var invitation = "不適用";
+
+    // ===============================
+    // 取得欄位真實送出值（若選「其他」，改抓 other input 的值）
+    // ===============================
+    function getFieldValue(selectId, otherInputId) {
+      const selectEl = document.getElementById(selectId);
+      const otherEl = document.getElementById(otherInputId);
+
+      if (!selectEl) return "未填寫";
+
+      if (selectEl.value === "__other__") {
+        const otherVal = otherEl ? otherEl.value.trim() : "";
+        return otherVal !== "" ? otherVal : "未填寫";
+      }
+
+      return selectEl.value || "未填寫";
+    }
+
+    // 只有出席的人才需要檢查這幾項
+    if (isAttending) {
+      ceremony = $("#ceremony").val() || "未填寫";
+      people = getFieldValue("people", "people_other");
+      vegan = getFieldValue("vegan", "vegan_other");
+      child = getFieldValue("child", "child_other");
+      invitation = getFieldValue("invitation", "invitation_other");
+
+      if (ceremony == "未填寫") {
+        $("#ceremony").focus();
+        alert("請選擇是否參加證婚儀式");
+        return false;
+      }
+      if (people == "未填寫") {
+        $("#people").focus();
+        alert("請選擇出席人數");
+        return false;
+      }
+      if (vegan == "未填寫") {
+        $("#vegan").focus();
+        alert("請選擇是否需要素食餐點");
+        return false;
+      }
+      if (child == "未填寫") {
+        $("#child").focus();
+        alert("請選擇是否需要兒童座椅");
+        return false;
+      }
+      if (invitation == "未填寫") {
+        $("#invitation").focus();
+        alert("請選擇是否需要實體喜帖");
+        return false;
+      }
+    }
+
+    var data = {
+      "entry.1216513580": username,
+      "entry.618175432": email,
+      "entry.1324538831": attend,
+      "entry.524804797": ceremony,
+      "entry.311049374": people,
+      "entry.1593018763": vegan,
+      "entry.2106988866": child,
+      "entry.1970862893": invitation,
+      "entry.2056938525": msg,
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSczyiadXQR6ISGD7MAC5z4UVu0KgN2IkvCbvQdNb7qR9gkkwQ/formResponse",
+      data: data,
+      complete: function () {
+        alert("已經成功送出表單，感謝您的填寫！");
+        location.href = "index.html";
+      },
+    });
+  });
 
   // ===============================
   // jarallax套件 視差滾動 設定
   // ===============================
-  // jarallax(document.querySelectorAll("#sec3-bkimg"), {
-  //   speed: 0.5,
-  // });
-
-  // jarallax(document.querySelectorAll(".sec3-img"), {
-  //   speed: 0.8,
-  // });
-
-  // jarallax(document.querySelectorAll("#section-form"), {
-  //   speed: 0.5,
-  // });
+  jarallax(document.querySelectorAll("#section-form"), {
+    speed: 0.5,
+  });
 
   // ===============================
   // 置底小圖示navbar設定
