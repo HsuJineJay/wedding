@@ -28,6 +28,10 @@ import "jarallax/dist/jarallax.css";
 // 引入 lenis
 import Lenis from "lenis";
 
+// 引入 WOW.js
+import "animate.css";
+import WOW from "wow.js";
+
 // ===============================
 // GSAP套件 平滑滾動 設定
 // ===============================
@@ -653,3 +657,64 @@ $(document).ready(function () {
 //     },
 //   },
 // );
+
+const peopleSelect = document.getElementById("people");
+const peopleOtherInput = document.getElementById("people_other");
+
+if (peopleSelect && peopleOtherInput) {
+  peopleSelect.addEventListener("change", () => {
+    const showOther = peopleSelect.value === "__other__";
+    peopleOtherInput.style.display = showOther ? "block" : "none";
+    peopleOtherInput.required = showOther;
+    if (!showOther) peopleOtherInput.value = "";
+  });
+}
+
+const veganSelect = document.getElementById("vegan");
+const veganOtherInput = document.getElementById("vegan_other");
+
+if (veganSelect && veganOtherInput) {
+  veganSelect.addEventListener("change", () => {
+    const showOther = veganSelect.value === "__other__";
+    veganOtherInput.style.display = showOther ? "block" : "none";
+    veganOtherInput.required = showOther;
+    if (!showOther) veganOtherInput.value = "";
+  });
+}
+
+const childSelect = document.getElementById("child");
+const childOtherInput = document.getElementById("child_other");
+
+if (childSelect && childOtherInput) {
+  childSelect.addEventListener("change", () => {
+    const showOther = childSelect.value === "__other__";
+    childOtherInput.style.display = showOther ? "block" : "none";
+    childOtherInput.required = showOther;
+    if (!showOther) childOtherInput.value = "";
+  });
+}
+
+const invitationSelect = document.getElementById("invitation");
+const invitationOtherInput = document.getElementById("invitation_other");
+
+if (invitationSelect && invitationOtherInput) {
+  invitationSelect.addEventListener("change", () => {
+    const showOther = invitationSelect.value === "__other__";
+    invitationOtherInput.style.display = showOther ? "block" : "none";
+    invitationOtherInput.required = showOther;
+    if (!showOther) invitationOtherInput.value = "";
+  });
+}
+
+// ===============================
+// 初始化 WOW
+// ===============================
+const wow = new WOW({
+  boxClass: "wow", // 需要套用動畫的類別名稱 (預設是 'wow')
+  animateClass: "animate__animated", // Animate.css v4+ 的核心類別名稱 (關鍵！)
+  offset: 0, // 距離瀏覽器底部多少像素時觸發動畫 (預設是 0)
+  mobile: true, // 是否在手機版裝置上觸發動畫 (預設是 true)
+  live: true, // 是否異步檢查新加入的 DOM 元素 (預設是 true)
+});
+
+wow.init();

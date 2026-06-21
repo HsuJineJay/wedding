@@ -78,6 +78,7 @@
   /* 統一管理輸入框、下拉選單、文字區域 */
   input[type="text"],
   input[type="tel"],
+  input[type="number"],
   input[type="email"],
   select,
   textarea {
