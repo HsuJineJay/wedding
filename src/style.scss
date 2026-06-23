@@ -1189,6 +1189,19 @@ $bp-xs: 576px;
   // );
 
   // background: radial-gradient(140% 10% at 50% -1%, #a39c8b 0%, #e6e1d5 60%);
+
+  .scroll-line {
+    &::after {
+      content: "";
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      animation: scroll-line 1.8s ease-in-out infinite;
+    }
+  }
 }
 
 /* --- Section 2 --- */
@@ -1332,3 +1345,14 @@ $bp-xs: 576px;
   7. Animation
   動畫設計 
 -------------------------------------------*/
+@keyframes scroll-line {
+  0% {
+    top: -100%;
+  }
+  50% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
