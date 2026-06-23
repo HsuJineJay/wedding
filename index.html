@@ -48,11 +48,15 @@
   <div class="overflow-wrapper">
 
     <!-- 置頂navbar start -->
-    <header class="nav-bar flex justify-center" id="header">
-      <div class="call_to_action">
-
-        <a href="#section-form">
-          <i class="fa fa-pencil-square-o fa-1x" aria-hidden="true"></i>直接填寫表單
+    <header class="nav-bar flex justify-end items-center fixed z-50 bottom-0 w-screen
+                 pt-9 lg:pt-8 px-5 lg:px-10 pb-2.5 lg:pb-8
+                 transition-all duration-500 ease-in-out" id="header">
+      <div class="call_to_action nav-item text-md px-5 py-1 rounded-full 
+              bg-[#BBAD8A] hover:bg-black/80 transition-all duration-500 ease group cursor-pointer">
+        <a class="flex flex-row justify-center items-center gap-2" href="#section-form">
+          <i class="fa fa-pencil-square-o fa-1x text-[24px] text-white group-hover:text-white transition-colors duration-500"
+            aria-hidden="true"></i>
+          <p class="pb-px text-sm text-white group-hover:text-white transition-colors duration-500">直接填寫表單</p>
         </a>
       </div>
     </header>
@@ -192,6 +196,7 @@
           relative w-[25vw] min-w-70 aspect-3/4 overflow-hidden object-cover text-center uppercase shadow-md rounded-sm
           border-[4.6vw_4vw_16vw] md:border-[2.4vw_2vw_8vw] lg:border-[1.2vw_1vw_5vw] border-white">
             <img class="
+
             absolute top-0 left-0 w-full h-full object-cover z-[-1]" src="./src/assets/sec1/sec1-15.jpg" />
           </div>
 
@@ -204,7 +209,7 @@
     <!-- section2 start -->
     <section class="section section2  bg-radial-[at_50%_0%] from-[#FFFFFF] to-[#E6E1D5] to-40%" id="section2">
 
-      <div class="h-[120vh] flex flex-col justify-center items-center gap-20">
+      <div class="h-[120vh] flex flex-col justify-center items-center gap-20 transition-all duration-500 ease-in-out">
         <h3 class="
             text-[10vw] md:text-[72px] lg:text-[48px] text-eng 
             flex justify-center w-full text-center
@@ -285,7 +290,7 @@
       </div>
 
 
-      <div class="pin-height h-[400vh] w-full">
+      <div class="pin-height h-[800vh] w-full transition-all duration-500 ease-in-out">
 
         <div class="sec-container flex items-center h-screen relative">
           <div class=" h-screen inset-0 absolute z-0 left-0 top-0" id="sec3-bkimg">

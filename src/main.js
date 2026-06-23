@@ -393,12 +393,13 @@ function wrapLettersInSpan(element) {
 // Lenis套件 平滑滾動 設定
 // ===============================
 const lenis = new Lenis({
-  duration: 1.5,
+  duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: "vertical",
   gestureOrientation: "vertical",
   smoothWheel: true,
   autoRaf: false,
+  wheelMultiplier: 1.4,
 });
 
 // Lenis 滾動時同步更新 ScrollTrigger
@@ -653,29 +654,29 @@ $(document).ready(function () {
   // 置底小圖示navbar設定
   // ===============================
 
-  // // 獲取 header 元素
-  // let header = document.getElementById("header");
+  // 獲取 header 元素
+  let header = document.getElementById("header");
 
-  // // 記錄上一次的滾動位置
-  // let lastScrollTop = 0;
+  // 記錄上一次的滾動位置
+  let lastScrollTop = 0;
 
-  // // 當頁面滾動時觸發
-  // window.addEventListener("scroll", function () {
-  //   let currentScroll =
-  //     window.pageYOffset || document.documentElement.scrollTop;
+  // 當頁面滾動時觸發
+  window.addEventListener("scroll", function () {
+    let currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
 
-  //   // 判斷滾動方向
-  //   if (currentScroll > lastScrollTop) {
-  //     // 向下滾動，隱藏 header
-  //     header.style.bottom = "0"; // 根據 header 的高度進行調整
-  //   } else {
-  //     // 向上滾動，顯示 header
-  //     header.style.bottom = "-100px"; // 顯示 header
-  //   }
+    // 判斷滾動方向
+    if (currentScroll > lastScrollTop) {
+      // 向下滾動，隱藏 header
+      header.style.bottom = "-100px"; // 根據 header 的高度進行調整
+    } else {
+      // 向上滾動，顯示 header
+      header.style.bottom = "0px"; // 顯示 header
+    }
 
-  //   // 更新 lastScrollTop 為當前的滾動位置
-  //   lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // 防止滾動過度
-  // });
+    // 更新 lastScrollTop 為當前的滾動位置
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // 防止滾動過度
+  });
 
   // ===============================
   // backToTop按鈕樣式
