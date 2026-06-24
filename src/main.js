@@ -399,7 +399,7 @@ const lenis = new Lenis({
   gestureOrientation: "vertical",
   smoothWheel: true,
   autoRaf: false,
-  wheelMultiplier: 1.4,
+  wheelMultiplier: 1.8,
 });
 
 // Lenis 滾動時同步更新 ScrollTrigger
@@ -668,10 +668,12 @@ $(document).ready(function () {
     // 判斷滾動方向
     if (currentScroll > lastScrollTop) {
       // 向下滾動，隱藏 header
-      header.style.bottom = "-100px"; // 根據 header 的高度進行調整
+      header.style.bottom = "-40px"; // 根據 header 的高度進行調整
+      header.style.opacity = "0";
     } else {
       // 向上滾動，顯示 header
       header.style.bottom = "0px"; // 顯示 header
+      header.style.opacity = "1";
     }
 
     // 更新 lastScrollTop 為當前的滾動位置

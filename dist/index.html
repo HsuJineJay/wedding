@@ -39,17 +39,17 @@
 
   <!-- 套件連結結束 -->
 
-  <!-- --引入js 開始-- -->
+  <!-- --引入js 開始-- -->
   <!-- --引入js 結束-- -->
-  <script type="module" crossorigin src="/wedding/assets/index-Dhofuow_.js"></script>
-  <link rel="stylesheet" crossorigin href="/wedding/assets/index-CsRuQ08g.css">
+  <script type="module" crossorigin src="/wedding/assets/index-CXAvvFFZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/wedding/assets/index-CYDrQ1XA.css">
 </head>
 
 <body>
   <div class="overflow-wrapper">
 
     <!-- 置頂navbar start -->
-    <header class="nav-bar flex justify-end items-center fixed z-50 bottom-0 w-screen
+    <!-- <header class="nav-bar flex justify-end items-center fixed z-50 bottom-0 w-screen
                  pt-9 lg:pt-8 px-5 lg:px-10 pb-2.5 lg:pb-8
                  transition-all duration-500 ease-in-out" id="header">
       <div class="call_to_action nav-item text-md px-5 py-1 rounded-full 
@@ -60,6 +60,43 @@
           <p class="pb-px text-sm text-white group-hover:text-white transition-colors duration-500">直接填寫表單</p>
         </a>
       </div>
+    </header> -->
+
+    <header class="nav-bar flex justify-end items-center fixed z-50 bottom-0 w-screen
+             pt-9 lg:pt-8 px-5 lg:px-10 pb-2.5 lg:pb-8
+             transition-all duration-500 ease-in-out" id="header">
+
+      <a href="#section-form"
+        class="call_to_action group relative flex items-center justify-center w-18 h-18 cursor-pointer">
+
+        <!-- 外圈旋轉文字 -->
+        <svg class="absolute inset-0 w-full h-full animate-[spin_8s_linear_infinite] " viewBox="0 0 200 200">
+          <defs>
+            <path id="textCircleTop" d="M 30,100 A 70,70 0 1,1 170,100" fill="none"></path>
+            <path id="textCircleBottom" d="M 170,100 A 70,70 0 0,1 30,100" fill="none"></path>
+          </defs>
+
+          <text class="fill-[#A39C8B] text-[32px] font-medium tracking-wider">
+            <textPath href="#textCircleTop" startOffset="50%" text-anchor="middle">
+              點擊填寫表單
+            </textPath>
+          </text>
+
+          <text class="fill-[#A39C8B] text-[32px] font-light tracking-widest">
+            <textPath href="#textCircleBottom" startOffset="50%" text-anchor="middle">
+              CLICK HERE
+            </textPath>
+          </text>
+        </svg>
+
+        <!-- 中心圓圈：向下箭頭 -->
+        <div class="relative z-10 w-10 h-10 rounded-full flex items-center justify-center 
+              bg-[#BBAD8A] group-hover:bg-black/80 hover:scale-125 transition-scale duration-500 ease">
+          <i class="fa fa-angle-down text-white text-3xl transition-colors duration-500 group-hover:animate-[arrow-drop_1.2s_ease-in-out_infinite]"
+            aria-hidden="true"></i>
+        </div>
+
+      </a>
     </header>
     <!-- 置頂navbar end -->
 
@@ -210,7 +247,8 @@
     <!-- section2 start -->
     <section class="section section2  bg-radial-[at_50%_0%] from-[#FFFFFF] to-[#E6E1D5] to-40%" id="section2">
 
-      <div class="h-[120vh] flex flex-col justify-center items-center gap-20 transition-all duration-500 ease-in-out">
+      <div class=" py-75
+       flex flex-col justify-center items-center gap-20 transition-all duration-500 ease-in-out">
         <h3 class="
             text-[10vw] md:text-[72px] lg:text-[48px] text-eng 
             flex justify-center w-full text-center
@@ -291,7 +329,7 @@
       </div>
 
 
-      <div class="pin-height h-[800vh] w-full transition-all duration-500 ease-in-out">
+      <div class="pin-height h-[8000px] w-full transition-all duration-500 ease-in-out">
 
         <div class="sec-container flex items-center h-screen relative">
           <div class=" h-screen inset-0 absolute z-0 left-0 top-0" id="sec3-bkimg">
