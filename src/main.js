@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
         },
         {
           width: "100vw",
-          height: "100vh",
+          height: "100dvh",
           top: "0",
           left: "0",
           borderRadius: "0px",
@@ -259,6 +259,27 @@ window.addEventListener("DOMContentLoaded", () => {
     );
   });
 
+  // ===============================
+  // 監聽手機網址列/導覽列收合造成的可視範圍變化
+  // 強制 ScrollTrigger 重新測量 pin 高度，並同步告知 Lenis 文件總高度也變了
+  // ===============================
+  if (window.visualViewport) {
+    let vvHeight = window.visualViewport.height;
+    let resizeTimer;
+
+    window.visualViewport.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const newHeight = window.visualViewport.height;
+        if (newHeight !== vvHeight) {
+          vvHeight = newHeight;
+          ScrollTrigger.refresh(); // 1. 先讓 GSAP 依新的 dvh 重新量 pin 的高度
+          lenis.resize(); // 2. 再讓 Lenis 重新量一次新的文件總高度，同步捲動範圍
+        }
+      }, 150);
+    });
+  }
+
   // --------------------------------------------------
   // GSAP sec3 文字逐字進出動畫
   // --------------------------------------------------
@@ -414,6 +435,22 @@ gsap.ticker.lagSmoothing(0);
 window.addEventListener("load", () => {
   lenis.resize();
   AOS.refresh();
+});
+
+// 跳轉表單按鈕點擊 → 交給 Lenis 處理平滑捲動
+document.addEventListener("click", (e) => {
+  const anchor = e.target.closest('a[href^="#"]');
+  if (!anchor) return;
+
+  const targetId = anchor.getAttribute("href");
+  const targetEl = document.querySelector(targetId);
+  if (!targetEl) return;
+
+  e.preventDefault();
+  lenis.scrollTo(targetEl, {
+    offset: 0,
+    duration: 1.2, // 跟你 Lenis 設定的 duration 對齊
+  });
 });
 
 // --------------------------------------------------
