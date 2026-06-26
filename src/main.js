@@ -85,8 +85,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // 3. 根據版本動態設定初始的 height 與 top
       // 手機版: 70vh (top 15vh 置中) | 電腦版: 80vh (top 10vh 置中)
-      let startHeight = isMobile ? "70vh" : "80vh";
-      let startTop = isMobile ? "15vh" : "10vh";
+      let startHeight = isMobile ? "70%" : "80%";
+      let startTop = isMobile ? "15%" : "10%";
 
       gsap.fromTo(
         "#sec1Video",
@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
         },
         {
           width: "100vw",
-          height: "100dvh",
+          height: "100%",
           top: "0",
           left: "0",
           borderRadius: "0px",
@@ -263,22 +263,22 @@ window.addEventListener("DOMContentLoaded", () => {
   // 監聽手機網址列/導覽列收合造成的可視範圍變化
   // 強制 ScrollTrigger 重新測量 pin 高度，並同步告知 Lenis 文件總高度也變了
   // ===============================
-  if (window.visualViewport) {
-    let vvHeight = window.visualViewport.height;
-    let resizeTimer;
+  // if (window.visualViewport) {
+  //   let vvHeight = window.visualViewport.height;
+  //   let resizeTimer;
 
-    window.visualViewport.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        const newHeight = window.visualViewport.height;
-        if (newHeight !== vvHeight) {
-          vvHeight = newHeight;
-          ScrollTrigger.refresh(); // 1. 先讓 GSAP 依新的 dvh 重新量 pin 的高度
-          lenis.resize(); // 2. 再讓 Lenis 重新量一次新的文件總高度，同步捲動範圍
-        }
-      }, 150);
-    });
-  }
+  //   window.visualViewport.addEventListener("resize", () => {
+  //     clearTimeout(resizeTimer);
+  //     resizeTimer = setTimeout(() => {
+  //       const newHeight = window.visualViewport.height;
+  //       if (newHeight !== vvHeight) {
+  //         vvHeight = newHeight;
+  //         ScrollTrigger.refresh(); // 1. 先讓 GSAP 依新的 dvh 重新量 pin 的高度
+  //         lenis.resize(); // 2. 再讓 Lenis 重新量一次新的文件總高度，同步捲動範圍
+  //       }
+  //     }, 150);
+  //   });
+  // }
 
   // --------------------------------------------------
   // GSAP sec3 文字逐字進出動畫
@@ -452,6 +452,94 @@ document.addEventListener("click", (e) => {
     duration: 1.2, // 跟你 Lenis 設定的 duration 對齊
   });
 });
+
+// ===============================
+// 用 JS 鎖定可視高度，取代 dvh/lvh（部分 webview 如 LINE 內建瀏覽器支援不完整）
+// 高度只會往「變大」的方向更新，網址列重新跳出來時刻意不縮回去，避免版面反覆抖動
+// ===============================
+ScrollTrigger.config({ ignoreMobileResize: true }); // 關掉 GSAP 自己對 resize 的自動 refresh，改由下面手動控制
+
+let lastWidth = window.innerWidth;
+let maxAppHeight = window.innerHeight;
+let appHeightTransitionTimer = null;
+
+function updateAppHeight() {
+  const currentWidth = window.innerWidth;
+  const currentHeight = window.innerHeight;
+
+  // 寬度變了 = 真正的旋轉螢幕或視窗縮放，直接用目前高度重新校正
+  if (currentWidth !== lastWidth) {
+    lastWidth = currentWidth;
+    maxAppHeight = currentHeight;
+    document.documentElement.style.setProperty(
+      "--app-height",
+      `${maxAppHeight}px`,
+    );
+    ScrollTrigger.refresh();
+    lenis.resize();
+    return;
+  }
+
+  // 寬度沒變、只是高度變大 = 網址列收合，沿用「只增不減」避免版面抖動
+  if (currentHeight > maxAppHeight) {
+    maxAppHeight = currentHeight;
+    document.documentElement.style.setProperty(
+      "--app-height",
+      `${maxAppHeight}px`,
+    );
+    removeJarallaxDeviceHelper();
+
+    // 等 h-app-smooth 的 0.6s transition 跑完才重新測量,否則會量到過渡中的中間值
+    clearTimeout(appHeightTransitionTimer);
+    appHeightTransitionTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+      lenis.resize();
+      window.dispatchEvent(new Event("resize"));
+    }, 650); // 比 CSS 的 0.6s 多留一點緩衝
+
+    ScrollTrigger.refresh();
+    lenis.resize();
+    window.dispatchEvent(new Event("resize"));
+  }
+}
+
+// 部分手機瀏覽器在網址列收合時，resize 事件會延遲或不準
+// 改成使用者開始滑動時，主動短暫輪詢偵測高度變化，比等事件通知更可靠
+let appHeightPollTimer = null;
+
+function startAppHeightPolling() {
+  if (appHeightPollTimer) return;
+
+  let pollCount = 0;
+  appHeightPollTimer = setInterval(() => {
+    updateAppHeight();
+    pollCount++;
+    if (pollCount > 30) {
+      // 輪詢約 3 秒後自動停止，避免持續耗效能
+      clearInterval(appHeightPollTimer);
+      appHeightPollTimer = null;
+    }
+  }, 100);
+}
+
+window.addEventListener("scroll", startAppHeightPolling, { passive: true });
+window.addEventListener("touchmove", startAppHeightPolling, { passive: true });
+
+// jarallax 在手機上會自己生一個隱藏的 100vh 測量用 div，
+// 但這個 div 一樣有 LINE 內建瀏覽器的 vh 過期問題，
+// 移除它後 jarallax 會自動退回去用 window.innerHeight（我們已經保證它是正確的）
+function removeJarallaxDeviceHelper() {
+  document.querySelectorAll("div").forEach((div) => {
+    if (
+      div.style.position === "fixed" &&
+      div.style.top === "-9999px" &&
+      div.style.width === "0px"
+    ) {
+      div.remove();
+    }
+  });
+}
+removeJarallaxDeviceHelper();
 
 // --------------------------------------------------
 // 婚禮倒數天數計算

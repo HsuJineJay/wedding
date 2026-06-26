@@ -141,6 +141,15 @@ select {
 ========================================================================== 
 */
 
+@utility h-app {
+  height: var(--app-height, 100vh);
+}
+
+@utility h-app-smooth {
+  height: var(--app-height, 100vh);
+  transition: height 0.6s ease;
+}
+
 @utility overflow-wrapper {
   width: 100%;
   overflow-x: hidden;
